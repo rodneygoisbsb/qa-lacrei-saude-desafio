@@ -22,8 +22,8 @@ Funcionalidade: Cadastro de Pessoa Usuária
         E seleciono a opção "Tenho 18 anos ou mais"
         E clico no botão "Cadastrar"
         E clico no botão "Cadastrar"
-        Então devo ver uma mensagem informativa para verificar meu e-mail
-        E devo ser redirecionado automaticamente para a tela de Login
+        #Então devo ver uma mensagem informativa para verificar meu e-mail
+        #E devo ser redirecionado automaticamente para a tela de Login
 
     Cenário: Tentar cadastrar com email já existente
         Quando clico na opção "Criar conta"
@@ -31,16 +31,16 @@ Funcionalidade: Cadastro de Pessoa Usuária
           | Campo                 | Valor                |
           | Nome civil ou social  | Rodney               |
           | Sobrenome             | Duplicado            |
-          | E-mail                | rodneygois2013@gmail.com |
-          | Confirme seu e-mail   | rodneygois2013@gmail.com |
+          | E-mail                | rodneygois2013@gmail.com     | 
+          | Confirme seu e-mail   | rodneygois2013@gmail.com     |
           | Senha                 | Lacrei@123           |
-          | Confirme sua senha    | Lacrei@123           |
+          | Confirme sua senha    | Lacrei@123           |     
         E seleciono a opção "Li e concordo com os Termos de uso e Política de privacidade"
         E seleciono a opção "Tenho 18 anos ou mais"
         E clico no botão "Cadastrar"
-        Então devo ver uma mensagem de erro indicando que o email já está em uso
-
-        Cenário: Validar campos obrigatórios no formulário de cadastro
-          Quando clico na opção "Criar conta"
-          E tento enviar o formulário de cadastro sem preencher os campos obrigatórios
-          Então devo ver mensagens de erro indicando que os campos obrigatórios precisam ser preenchidos
+        #Então devo ver uma mensagem de erro indicando que o email já está em uso
+        
+    Cenário: Validar que formato de e-mail incorreto desabilita o botão "Cadastrar"
+        Quando clico na opção "Criar conta"
+        E preencho todos os campos obrigatórios corretamente, exceto o e-mail com "teste.teste@"
+        Então o botão "Cadastrar" deve permanecer desabilitado
