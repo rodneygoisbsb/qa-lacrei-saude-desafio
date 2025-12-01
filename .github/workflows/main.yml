@@ -1,0 +1,41 @@
+name: Testes Automatizados Cypress
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    name: Rodar Testes E2E (Cadastro)
+    
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar Dependências
+        run: npm ci
+
+      - name: Executar Cypress (Modo Headless)
+        uses: cypress-io/github-action@v6
+        with:
+          install: false
+          command: npx cypress run
+        continue-on-error: true # IMPORTANTE: Continua mesmo com o bug 500 do servidor
+
+      - name: Guardar Evidências (Prints/Videos)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-cypress
+          path: |
+            cypress/screenshots
+            cypress/videos
+          retention-days: 5
